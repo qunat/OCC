@@ -411,6 +411,7 @@ class X3DomRenderer:
             return self._x3d_shapes, self._x3d_edges
         if file_name=="":
             shape_uuid = uuid.uuid4().hex
+            shape_hash = "shp%s" % shape_uuid
         else:
             shape_hash = "%s" % file_name
             

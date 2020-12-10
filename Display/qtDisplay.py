@@ -256,10 +256,9 @@ class qtViewer3d(qtBaseViewer):
     def mouseMoveEvent(self, evt):
         pt = evt.pos()
         buttons = int(evt.buttons())
- 
         modifiers = evt.modifiers()
         # ROTATE
-        if (buttons == QtCore.Qt.MidButton and
+        if (buttons == QtCore.Qt.LeftButton and
                 not modifiers == QtCore.Qt.ShiftModifier):
             self.cursor = "rotate"
             self._display.Rotation(pt.x(), pt.y())
@@ -276,7 +275,7 @@ class qtViewer3d(qtBaseViewer):
             self.dragStartPosY = pt.y()
             self._drawbox = False
         # PAN
-        elif evt.buttons () == QtCore.Qt.MidButton | QtCore.Qt.RightButton:
+        elif buttons == QtCore.Qt.MidButton:
             dx = pt.x() - self.dragStartPosX
             dy = pt.y() - self.dragStartPosY
             self.dragStartPosX = pt.x()

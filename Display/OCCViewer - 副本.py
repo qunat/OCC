@@ -56,7 +56,6 @@ from OCC.Core.Graphic3d import (Graphic3d_NOM_NEON_GNC, Graphic3d_NOT_ENV_CLOUDS
                                 Graphic3d_Structure
                                 )
 from OCC.Core.Aspect import Aspect_TOTP_RIGHT_LOWER, Aspect_FM_STRETCH, Aspect_FM_NONE
-from OCC.Core.Graphic3d import  Graphic3d_NOM_STEEL
 
 # Shaders and Units definition must be found by occ
 # the fastest way to get done is to set the CASROOT env variable
@@ -485,8 +484,6 @@ class Viewer3d(Display3d):
                 # TODO: can we use .Set to attach all TopoDS_Shapes
                 # to this AIS_Shape instance?
                 shape_to_display = AIS_Shape(shape)
-                #shape_to_display.SetMaterial(Graphic3d_MaterialAspect(material))
-                
 
             ais_shapes.append(shape_to_display)
 
@@ -512,13 +509,7 @@ class Viewer3d(Display3d):
             elif isinstance(color, int):
                 color = Quantity_Color(color)
             for shp in ais_shapes:
-                if material:
-                    ls_color = Graphic3d_MaterialAspect(material)
-                else:
-                    ls_color = Graphic3d_MaterialAspect(Graphic3d_NOM_STEEL)
-                ls_color.SetColor(color)
-                shp.SetMaterial(ls_color)
-                #self.Context.SetColor(shp, color, False)
+                self.Context.SetColor(shp, color, False)
         if transparency:
             for shape_to_display in ais_shapes:
                 shape_to_display.SetTransparency(transparency)
