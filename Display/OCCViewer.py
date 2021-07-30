@@ -512,12 +512,20 @@ class Viewer3d(Display3d):
             elif isinstance(color, int):
                 color = Quantity_Color(color)
             for shp in ais_shapes:
-                if material:
-                    ls_color = Graphic3d_MaterialAspect(material)
+
+                if shp.Shape().ShapeType()==6 or shp.Shape().ShapeType()==5:
+                    pass
+                    self.Context.SetColor(shp, color, False)
                 else:
-                    ls_color = Graphic3d_MaterialAspect(Graphic3d_NOM_STEEL)
-                ls_color.SetColor(color)
-                shp.SetMaterial(ls_color)
+                    pass
+                    if material:
+                        ls_color = Graphic3d_MaterialAspect(material)
+                    else:
+                        ls_color = Graphic3d_MaterialAspect(Graphic3d_NOM_STEEL)
+                    ls_color.SetColor(color)
+                    shp.SetMaterial(ls_color)
+
+
                 #self.Context.SetColor(shp, color, False)
         if transparency:
             for shape_to_display in ais_shapes:
